@@ -1,17 +1,28 @@
 pipeline {
-  // Run on an agent where we want to use Go
   agent any
 
-  // Ensure the desired Go version is installed for all stages,
-  // using the name defined in the Global Tool Configuration
   tools { go '1.21.3' }
-
+    
+    environment {
+        GIT_BRANCH = 'main'
+        GIT_URL = 'git@github.com:billzayy/jenkins-golang.git'
+    }
+    
   stages {
-    stage('Build') {
+    stage('Git Checkout') {
+        steps {
+            git branch: "${GIT_BRANCH}", url: "${GIT_URL}", poll: false
+        }
+    }
+    stage('Test Version') {
       steps {
-        // Output will be something like "go version go1.19 darwin/arm64"
         sh 'go version'
       }
+    }
+    stage('Run'){
+        steps{
+            sh 'go run .'
+        }
     }
   }
 }
