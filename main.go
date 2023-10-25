@@ -26,5 +26,5 @@ func main() {
 		api.GET("/get-user", services.GetUser)
 	}
 
-	app.Run(":1234")
+	app.Run(":123")
 }
