@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/billzayy/jenkins-golang/services"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -26,5 +28,5 @@ func main() {
 		api.GET("/get-user", services.GetUser)
 	}
 
-	app.Run(":123")
+	app.Run(":" + os.Getenv("PORT"))
 }
