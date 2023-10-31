@@ -11,7 +11,8 @@ pipeline {
   stages {
     stage('Git Checkout') {
         steps {
-            git branch: "${GIT_BRANCH}", url: "${GIT_URL}", poll: false
+            // git branch: "${GIT_BRANCH}", url: "${GIT_URL}", poll: false
+            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/billzayy/jenkins-golang']])
         }
     }
     stage('Test Version') {
