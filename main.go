@@ -5,9 +5,12 @@ import (
 
 	"github.com/billzayy/jenkins-golang/services"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	godotenv.Load()
+
 	app := gin.Default()
 
 	api := app.Group("/api")
