@@ -3,15 +3,9 @@ pipeline {
 
   tools { go '1.21.3' }
     
-    environment {
-        GIT_BRANCH = 'main'
-        GIT_URL = 'git@github.com:billzayy/jenkins-golang.git'
-    }
-    
   stages {
     stage('Git Checkout') {
         steps {
-            // git branch: "${GIT_BRANCH}", url: "${GIT_URL}", poll: false
             checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/billzayy/jenkins-golang']])
         }
     }
@@ -22,7 +16,7 @@ pipeline {
     }
     stage('Run'){
         steps{
-            sh 'go run .'
+            sh 'go build . && ./jenkins-golang'
         }
     }
   }
