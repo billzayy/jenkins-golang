@@ -23,5 +23,4 @@ func main() {
 
 	// app.Run(":" + os.Getenv("PORT"))
 	fmt.Println("Hello Jenkins Integrate with Github")
-	fmt.Println("Hi Bill")
 }
