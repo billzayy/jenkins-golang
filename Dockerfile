@@ -8,8 +8,5 @@ RUN go mod download && go mod verify
 COPY . .
 RUN go build .
 
-COPY . .
-RUN go install github.com/cosmtrek/air@latest
-
 EXPOSE 2345
-CMD ["air"]
+CMD ["go build . && ./jenkins-golang"]
