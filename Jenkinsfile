@@ -14,9 +14,24 @@ pipeline {
         sh 'go version'
       }
     }
-    stage('Run'){
+    stage('Check Docker'){
         steps{
-            sh 'go build . && ./jenkins-golang'
+            sh 'docker version'
+        }
+    }
+    stage('Build & Push Images'){
+        steps{
+            script{
+                withDockerRegistry(credentialsId: 'billzay-docker', toolName: 'Docker', url: 'https://index.docker.io/v1/') {
+                    sh 'docker build -t coderbillzay/jenkins-golang .'
+                    sh 'docker push coderbillzay/jenkins-golang'
+                }
+            }
+        }
+    }
+    stage('Run Docker-Compose'){
+        steps{
+            sh 'docker-compose up -d'
         }
     }
   }
